@@ -15,15 +15,19 @@ for (var i = 0; i < pacientes.length; i++) {
 
     var tdImc = paciente.querySelector(".info-imc");
 
+	var tdClass = paciente.querySelector(".info-class");
+
     var pesoEhValido = validaPeso(peso);
     var alturaEhValida = validaAltura(altura);
 
     pesoInvalido(pesoEhValido);
     alturaInvalida(alturaEhValida);
 
-    if (pesoEhValido && alturaEhValida) {
+    if (alturaEhValida && pesoEhValido) {
         var imc = calculaImc(peso, altura);
+		var index = classificaImc(imc);
         tdImc.textContent = imc;
+		tdClass.textContent = index;
     }
 }
 
@@ -41,6 +45,22 @@ function validaAltura(altura) {
     } else {
         return false;
     }
+}
+
+function classificaImc(imc) {
+    if (imc < 18.5) {
+        return ("Abaixo do Peso");
+    } else if (imc >= 18.5 && imc <= 24.9) {
+        return ("Peso Normal");
+    } else if (imc >= 25 && imc <= 29.9) {
+        return ("Sobrepeso");
+    } else if (imc >= 30 && imc <= 34.9) {
+        return ("Obesidade Grau I");
+    } else if (imc >= 35 && imc < 39.9) {
+        return ("Obesidade Grau II");
+    } else {
+		return ("Obesidade Grau III \n ou Mórbida");
+	}
 }
 
 function pesoInvalido(pesoEhValido){
