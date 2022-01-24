@@ -55,11 +55,11 @@ function classificaImc(imc) {
     } else if (imc >= 25 && imc <= 29.9) {
         return ("Sobrepeso");
     } else if (imc >= 30 && imc <= 34.9) {
-        return ("Obesidade Grau I");
+        return ("Obesidade Grau 1");
     } else if (imc >= 35 && imc < 39.9) {
-        return ("Obesidade Grau II");
+        return ("Obesidade Grau 2");
     } else {
-		return ("Obesidade Grau III ou Mórbida");
+		return ("Obesidade Grau 3 ou Mórbida");
 	}
 }
 
