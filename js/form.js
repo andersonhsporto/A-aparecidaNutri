@@ -8,6 +8,8 @@ botaoAdicionar.addEventListener("click", function(event) {
     var tabela = document.querySelector("#tabela-pacientes");
 
     tabela.appendChild(pacienteTr);
+
+	form.reset();
 });
 
 function criarPaciente(form){
@@ -17,7 +19,9 @@ function criarPaciente(form){
 		peso: form.peso.value,
 		altura: form.altura.value,
 		gordura: form.gordura.value,
-		imc: calculaImc(form.peso.value, form.altura.value)
+		imc: calculaImc(form.peso.value, form.altura.value),
+		index: classificaImc(calculaImc(form.peso.value, form.altura.value))
+
 	}
 	return (paciente);
 }
@@ -25,26 +29,20 @@ function criarPaciente(form){
 function criarTr(paciente){
 	var pacienteTr = document.createElement("tr");
 
-	var nomeTd = document.createElement("td");
-    var pesoTd = document.createElement("td");
-    var alturaTd = document.createElement("td");
-    var gorduraTd = document.createElement("td");
-    var imcTd = document.createElement("td");
-	var indexTd = document.createElement("td");
-
-    nomeTd.textContent = paciente.nome;
-    pesoTd.textContent = paciente.peso;
-    alturaTd.textContent = paciente.altura;
-    gorduraTd.textContent = paciente.gordura;
-	imcTd.textContent = paciente.imc;
-	indexTd.textContent = classificaImc(paciente.imc);
-
-    pacienteTr.appendChild(nomeTd);
-    pacienteTr.appendChild(pesoTd);
-    pacienteTr.appendChild(alturaTd);
-    pacienteTr.appendChild(gorduraTd);
-	pacienteTr.appendChild(imcTd);
-	pacienteTr.appendChild(indexTd);
-
+	pacienteTr.classList.add("Paciente");
+    pacienteTr.appendChild(criarTd(paciente.nome, "info-nome"));
+    pacienteTr.appendChild(criarTd(paciente.peso, "info-peso"));
+    pacienteTr.appendChild(criarTd(paciente.altura, "info-altura"));
+    pacienteTr.appendChild(criarTd(paciente.gordura, "info-gordura"));
+	pacienteTr.appendChild(criarTd(paciente.imc, "info-imc"));
+	pacienteTr.appendChild(criarTd(paciente.index, "info-class"));
 	return (pacienteTr);
+}
+
+function criarTd(nome, classe){
+	var td = document.createElement("td");
+
+	td.textContent = nome;
+	td.classList.add(classe);
+	return (td);
 }

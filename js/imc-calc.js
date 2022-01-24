@@ -59,7 +59,7 @@ function classificaImc(imc) {
     } else if (imc >= 35 && imc < 39.9) {
         return ("Obesidade Grau II");
     } else {
-		return ("Obesidade Grau III \n ou Mórbida");
+		return ("Obesidade Grau III ou Mórbida");
 	}
 }
 
