@@ -3,10 +3,17 @@ botaoAdicionar.addEventListener("click", function(event) {
     event.preventDefault();
 
     var form = document.querySelector("#form-add");
+
 	var paciente = criarPaciente(form);
+	var erro = validaPaciente(paciente);
+	if (erro.length > 0) {
+
+		mostrarErros(erro);
+		return ;
+	}
+
     var pacienteTr = criarTr(paciente);
     var tabela = document.querySelector("#tabela-pacientes");
-
     tabela.appendChild(pacienteTr);
 
 	form.reset();
@@ -45,4 +52,40 @@ function criarTd(nome, classe){
 	td.textContent = nome;
 	td.classList.add(classe);
 	return (td);
+}
+
+function validaPaciente(paciente){
+
+	var erros = [];
+
+	if (paciente.nome.length == 0){
+		(erros.push("O campo nome não pode estar vazio"));
+	}
+	if (paciente.gordura.length == 0){
+		(erros.push("O campo gordura não pode estar vazio"));
+	}
+	if (paciente.peso.length == 0){
+		(erros.push("O campo peso não pode estar vazio"));
+	}
+	if (paciente.altura.length == 0){
+		(erros.push("O campo altura não pode estar vazio"));
+	}
+	if(!validaPeso(paciente.peso)){
+		(erros.push("Peso Invalido !"));
+	}
+	if (!validaAltura(paciente.altura)){
+		(erros.push("Altura Invalida !"));
+	}
+	return (erros);
+}
+
+function mostrarErros(erros){
+	var ul = document.querySelector("#messagem-erro");
+	ul.innerHTML = "";
+
+	erros.forEach(function(erro){
+		var li = document.createElement("li");
+		li.textContent = erro;
+		ul.appendChild(li);
+	});
 }
