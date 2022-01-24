@@ -23,4 +23,3 @@ campoFiltro.addEventListener("input", function() {
         }
     }
 });
-
